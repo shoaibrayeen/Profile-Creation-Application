@@ -13,9 +13,11 @@ router.get('/ping', pingControllerObj.index);
 var userControllerObj = require("../controllers/userController.js");
 router.get('/users/ping', userControllerObj.index);
 router.get('/users', userControllerObj.getAllUsers);
-router.get('/users/:id', userControllerObj.getUserById);
-router.put('/users/:id', userControllerObj.updateUserById);
-router.delete('/users/:id', userControllerObj.deleteUserById);
+router.get('/users/:username', userControllerObj.getUserByusername);
+//router.put('/users/:username', userControllerObj.updateUserInformation);
+//router.put('/users/password/:username', userControllerObj.updatePassword)
+//router.put('/users/inactive/:username', userControllerObj.inactiveUser);
+//router.put('/users/active/:username', userControllerObj.activeUser);
 router.post('/users', userControllerObj.createUser);
 
 
