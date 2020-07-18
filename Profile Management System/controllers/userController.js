@@ -1,31 +1,25 @@
 var UserObj = require('../models/users.js');
+var applicationHelper = require('../helpers/applicationHelper.js')
 
 const index = (req, res) => {
 	res.status(200).send({
         status: 'success',
         statusCode: '2XX',
-        message: 'User Controller Connected!'
+        message: 'Not Found'
     })
 };
 
-const getUserById = (req, res) => {
-    UserObj.getUserById(req.params.id, function(err, rows){
-        if(err) {
-          res.json(err);
+const getUserByusername = (req, res) => {
+    UserObj.credentials.getUser(req.params.username, function(err,rows) {
+        if(err)
+        {
+            res.json(err);
         }
-        else {
-            let result = {};
-            if (!rows.length) {
-                result.message = 'User Not Found'
-            }
-            else {
-                result.message = 'User Found'
-            }
-            result.status = 'success';
-            result.statusCode = '2XX';
-            result.data = rows
-            res.json(result);
+        else
+        {
+            res.json(rows);
         }
+
     });
 };
 
@@ -40,8 +34,8 @@ const getAllUsers = (req, res) => {
     });
 };
 
-const deleteUserById = (req, res) => {
-    UserObj.deleteUser(req.params.id,function(err,count){
+const deleteUserByusername = (req, res) => {
+    UserObj.deleteUser(req.params.username,function(err,count){
 
         if(err)
         {
@@ -67,8 +61,8 @@ const createUser = (req, res) => {
     });
 };
 
-const updateUserById = (req, res) => {
-    UserObj.updateUser(req.params.id, req.body, function(err,rows){
+const updateUserByusername = (req, res) => {
+    UserObj.updateUser(req.params.username, req.body, function(err,rows){
         if(err)
         {
             res.json(err);
@@ -82,9 +76,9 @@ const updateUserById = (req, res) => {
 
 module.exports = {
     index: index,
-    getUserById: getUserById,
+    getUserByusername: getUserByusername,
     getAllUsers: getAllUsers,
-    deleteUserById: deleteUserById,
+    deleteUserByusername: deleteUserByusername,
     createUser: createUser,
-    updateUserById: updateUserById
+    updateUserByusername: updateUserByusername
 };
