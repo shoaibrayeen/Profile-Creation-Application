@@ -1,5 +1,5 @@
 var UserObj = require('../models/users.js');
-var applicationHelper = require('../helpers/applicationHelper.js')
+var applicationHelper = require('../helpers/applicationHelper.js');
 
 const index = (req, res) => {
 	res.status(200).send({
@@ -9,7 +9,7 @@ const index = (req, res) => {
     })
 };
 
-const getUserByusername = (req, res) => {
+const getUserCredentialByUsername = (req, res) => {
     UserObj.credentials.getUser(req.params.username, function(err,rows) {
         if(err)
         {
@@ -17,40 +17,69 @@ const getUserByusername = (req, res) => {
         }
         else
         {
-            res.json(rows);
+            var result = {};
+            if (!rows.length) {
+                result.message = 'User Not Found'
+            }
+            else {
+                result.message = 'User Found'
+            }
+            result.status = 'success';
+            result.statusCode = '2XX';
+            result.data = rows
+            res.json(result);
         }
 
     });
 };
 
-const getAllUsers = (req, res) => {
-    UserObj.getAllUsers(function(err, rows) {
-        if(err) {
-          res.json(err);
-        }
-        else {
-          res.json(rows);
-        }
-    });
-};
-
-const deleteUserByusername = (req, res) => {
-    UserObj.deleteUser(req.params.username,function(err,count){
-
+const getUserByUsername = (req, res) => {
+    UserObj.users.getUserByUsername(req.params.username, function(err,rows) {
         if(err)
         {
             res.json(err);
         }
         else
         {
-            res.json(count);
+            var result = {};
+            if (!rows.length) {
+                result.message = 'User Not Found'
+            }
+            else {
+                result.message = 'User Found'
+            }
+            result.status = 'success';
+            result.statusCode = '2XX';
+            result.data = rows
+            res.json(result);
         }
 
     });
 };
 
-const createUser = (req, res) => {
-    UserObj.addUser(req.body,function(err,count){
+const getAllUsers = (req, res) => {
+    UserObj.users.getAllUsers(function(err, rows) {
+        if(err) {
+          res.json(err);
+        }
+        else {
+            var result = {};
+            if (!rows.length) {
+                result.message = 'No Users!'
+            }
+            else {
+                result.message = 'Users Found'
+            }
+            result.status = 'success';
+            result.statusCode = '2XX';
+            result.data = rows
+            res.json(result);
+        }
+    });
+};
+
+const addUser = (req, res) => {
+    UserObj.users.addUser(req.body, function(err,count){
         if(err)
         {
             res.json(err);
@@ -61,8 +90,20 @@ const createUser = (req, res) => {
     });
 };
 
-const updateUserByusername = (req, res) => {
-    UserObj.updateUser(req.params.username, req.body, function(err,rows){
+const addCredential = (req, res) => {
+    UserObj.credentials.addCredential(req.body, function(err,count){
+        if(err)
+        {
+            res.json(err);
+        }
+        else{
+            res.json(req.body);
+        }
+    });
+};
+
+const updateUserByUsername = (req, res) => {
+    UserObj.users.updateUserInfo(req.params.username, req.body, function(err,rows){
         if(err)
         {
             res.json(err);
@@ -74,11 +115,55 @@ const updateUserByusername = (req, res) => {
     });
 };
 
+const updateUserCredentialByUsername = (req, res) => {
+    UserObj.credentials.updatePassword(req.params.username, req.body, function(err,rows){
+        if(err)
+        {
+            res.json(err);
+        }
+        else
+        {
+            res.json(rows);
+        }
+    });
+};
+
+const inactiveUser = (req, res) => {
+    UserObj.credentials.inactiveUser(req.params.username, function(err,rows){
+        if(err)
+        {
+            res.json(err);
+        }
+        else
+        {
+            res.json(rows);
+        }
+    });
+};
+
+const activeUser = (req, res) => {
+    UserObj.credentials.activeUser(req.params.username, function(err,rows){
+        if(err)
+        {
+            res.json(err);
+        }
+        else
+        {
+            res.json(rows);
+        }
+    });
+};
+
+
 module.exports = {
     index: index,
-    getUserByusername: getUserByusername,
+    getUserByUsername: getUserByUsername,
+    getUserCredentialByUsername: getUserCredentialByUsername,
     getAllUsers: getAllUsers,
-    deleteUserByusername: deleteUserByusername,
-    createUser: createUser,
-    updateUserByusername: updateUserByusername
+    addUser: addUser,
+    addCredential: addCredential,
+    updateUserByUsername: updateUserByUsername,
+    updateUserCredentialByUsername: updateUserCredentialByUsername,
+    inactiveUser: inactiveUser,
+    activeUser: activeUser
 };
