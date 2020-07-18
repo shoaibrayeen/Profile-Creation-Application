@@ -85,7 +85,12 @@ const addUser = (req, res) => {
             res.json(err);
         }
         else{
-            res.json(req.body);
+            var result = {};
+            result.message = 'Users Created!'
+            result.status = 'success';
+            result.statusCode = '2XX';
+            result.data = req.body;
+            res.json(result);
         }
     });
 };
@@ -97,7 +102,12 @@ const addCredential = (req, res) => {
             res.json(err);
         }
         else{
-            res.json(req.body);
+            var result = {};
+            result.message = 'Users Credential Added!'
+            result.status = 'success';
+            result.statusCode = '2XX';
+            result.data = req.body;
+            res.json(result);
         }
     });
 };
@@ -110,7 +120,12 @@ const updateUserByUsername = (req, res) => {
         }
         else
         {
-            res.json(rows);
+            var result = {};
+            result.message = 'User Updated!'
+            result.status = 'success';
+            result.statusCode = '2XX';
+            result.data = rows;
+            res.json(result);
         }
     });
 };
@@ -123,7 +138,12 @@ const updateUserCredentialByUsername = (req, res) => {
         }
         else
         {
-            res.json(rows);
+            var result = {};
+            result.message = 'Password Updated!s'
+            result.status = 'success';
+            result.statusCode = '2XX';
+            result.data = rows;
+            res.json(result);
         }
     });
 };
@@ -136,7 +156,12 @@ const inactiveUser = (req, res) => {
         }
         else
         {
-            res.json(rows);
+            var result = {};
+            result.message = 'User Inactive Successfully!'
+            result.status = 'success';
+            result.statusCode = '2XX';
+            result.data = rows;
+            res.json(result);
         }
     });
 };
@@ -149,7 +174,12 @@ const activeUser = (req, res) => {
         }
         else
         {
-            res.json(rows);
+            var result = {};
+            result.message = 'User Inactive Successfully!'
+            result.status = 'success';
+            result.statusCode = '2XX';
+            result.data = rows;
+            res.json(result);
         }
     });
 };
