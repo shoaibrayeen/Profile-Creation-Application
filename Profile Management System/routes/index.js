@@ -17,8 +17,8 @@ router.get('/users/credential/:username', userControllerObj.getUserByUsername);
 router.get('/users/info/:username', userControllerObj.getUserCredentialByUsername);
 router.put('/users/:username', userControllerObj.updateUserByUsername);
 router.put('/users/credential/:username', userControllerObj.updateUserCredentialByUsername);
-router.put('/users/inactive/:username', userControllerObj.inactiveUser);
-router.put('/users/active/:username', userControllerObj.activeUser);
+router.get('/users/inactive/:username', userControllerObj.inactiveUser);
+router.get('/users/active/:username', userControllerObj.activeUser);
 router.post('/users', userControllerObj.addUser);
 router.post('/users/credential', userControllerObj.addCredential);
 
