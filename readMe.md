@@ -45,6 +45,30 @@ To Use Model
   > mysql -u root -p
   mysql >>> use DATABASE_NAME;
   mysql >>> SELECT * FROM TABLE_NAME;
+  
+  mysql > describe users;
+  +------------+--------------+------+-----+-------------------+-----------------------------+
+  | Field      | Type         | Null | Key | Default           | Extra                       |
+  +------------+--------------+------+-----+-------------------+-----------------------------+
+  | username   | varchar(500) | NO   | PRI | NULL              |                             |
+  | name       | varchar(100) | NO   |     | NULL              |                             |
+  | email      | varchar(500) | NO   | UNI | NULL              |                             |
+  | contact    | varchar(500) | NO   | UNI | NULL              |                             |
+  | created_at | datetime     | NO   |     | CURRENT_TIMESTAMP |                             |
+  | updated_at | datetime     | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+  +------------+--------------+------+-----+-------------------+-----------------------------+
+
+  mysql > describe credentials;
+  +------------+--------------+------+-----+-------------------+-----------------------------+
+  | Field      | Type         | Null | Key | Default           | Extra                       |
+  +------------+--------------+------+-----+-------------------+-----------------------------+
+  | username   | varchar(500) | NO   | PRI | NULL              |                             |
+  | password   | varchar(500) | NO   |     | NULL              |                             |
+  | status     | varchar(10)  | NO   |     | active            |                             |
+  | created_at | datetime     | NO   |     | CURRENT_TIMESTAMP |                             |
+  | updated_at | datetime     | NO   |     | CURRENT_TIMESTAMP | on update CURRENT_TIMESTAMP |
+  +------------+--------------+------+-----+-------------------+-----------------------------+
+
 ```
 
 To Use Postman API
